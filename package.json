@@ -1,0 +1,22 @@
+{
+  "name": "littleboyblog",
+  "version": "1.0.0",
+  "description": "Little Boy's personal blog",
+  "main": "index.js",
+  "scripts": {
+    "run": "next run",
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
+    "export": "next export"
+  },
+  "author": "Thanawat Yodnil",
+  "license": "ISC",
+  "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.2.1",
+    "react": "^16.12.0",
+    "react-async": "^10.0.0",
+    "react-dom": "^16.12.0"
+  }
+}
