@@ -8,8 +8,7 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "export": "next export",
-    "deploy": "touch out/.nojekyll && mv out/ docs/ && git add docs/ && git commit -m 'Deploy to GitHub Pages' && git push origin master"
+    "export": "next export"
   },
   "author": "Thanawat Yodnil",
   "license": "ISC",
