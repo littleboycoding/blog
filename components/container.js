@@ -1,49 +1,37 @@
 import dynamic from "next/dynamic";
+import Head from "next/head";
+import containerStyle from "../css/container.module.css";
+import React, { useState, useEffect } from "react";
 
 const UserInfo = dynamic(() => import("./userinfo"), {
-  loading: () => "กำลังโหลด Module"
+  loading: () => <h1>{". . ."}</h1>
 });
 
 function Container(props) {
+  const year = new Date().getFullYear();
+  const [title, setTitle] = useState(props.title);
+
+  useEffect(() => {
+    document.title = `${title} - Little Boy`;
+  });
+
   return (
-    <>
-      <style jsx global>
-        {`
-          @import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
-          * {
-            font-family: Kanit;
-            box-sizing: border-box;
-          }
-        `}
-      </style>
-      <style jsx>{`
-        .container {
-          width: 55%;
-          min-width: 900px;
-          position: absolute;
-          left: 50%;
-          top: 60px;
-          transform: translateX(-50%);
-        }
-        .content {
-          padding: 0px 30px 0px 30px;
-        }
-        @media screen and (max-width: 900px) {
-          .container {
-            width: 100%;
-            min-width: 0;
-            left: 0;
-            top: 0;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
-      <div className="container">
-        <UserInfo />
-        <span style={{ clear: "both" }}></span>
-        <div className="content">{props.children}</div>
+    <div className={containerStyle.container}>
+      <UserInfo />
+      <div className={containerStyle.content}>{props.children}</div>
+      <div className={containerStyle.footer}>
+        <p>
+          <a
+            target="_blank"
+            href="https://en.wikipedia.org/wiki/Creative_Commons_license"
+          >
+            Creative Common License
+          </a>
+          {` @${year} 📝`}
+        </p>
+        <p>Created with ♥️ by Thanawat Yodnil</p>
       </div>
-    </>
+    </div>
   );
 }
 

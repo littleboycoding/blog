@@ -1,63 +1,44 @@
 import fetch from "isomorphic-unfetch";
-import { useAsync } from "react-async";
+import useSWR from "swr";
+import userinfoStyle from "../css/userinfo.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
-async function fetchData() {
+async function fetchData(url) {
   //Fetch GitHub user info api
-  const res = await fetch("https://api.github.com/users/littleboycoding");
-  return res.json();
+  return await fetch(url).then(res => res.json());
 }
 
 function UserInfo(props) {
-  const { data, error, isPending } = useAsync(fetchData);
-  if (isPending) return "กำลังโหลดข้อมูล";
-  if (error) return "มีปัญหาในขณะกำลังโหลดข้อมูล";
+  const { data, error } = useSWR(
+    "https://api.github.com/users/littleboycoding",
+    fetchData
+  );
+  if (!data)
+    return (
+      <div className={userinfoStyle.userContainer}>
+        <h1>{". . ."}</h1>
+      </div>
+    );
   if (data)
     return (
-      <>
-        <style jsx>
-          {`
-            .userContainer {
-              border-bottom: 1px solid #aaa;
-              padding: 15px 50px 15px 50px;
-            }
-            .userSection {
-              float: left;
-              width: calc(100% - 200px);
-            }
-            img {
-              margin-right: 10px;
-              width: 150px !important;
-              height: 150px;
-              object-fit: cover;
-              border-radius: 5px;
-            }
-            @media screen and (max-width: 900px) {
-              .userSection {
-                width: 100%;
-              }
-              img {
-                border-radius: 50%;
-                margin-right: 0;
-              }
-            }
-          `}
-        </style>
-        <div className="userContainer">
-          <img className="userSection" src={data.avatar_url} />
-          <div className="userSection">
-            <h2 style={{ display: "inline-block", marginBottom: "5px" }}>
-              {data.name}
-            </h2>
-            {" @"}
-            <span>{data.login}</span>
-            <br />
-            <a href="https://github.com/littleboycoding">GitHub</a>{" "}
-            <a href="https://www.facebook.com/littleboycoding">Facebook</a>
-            <p>{data.bio}</p>
-          </div>
-          <br style={{ clear: "both" }} />
+      <div className={userinfoStyle.userContainer}>
+        <img className={userinfoStyle.userImage} src={data.avatar_url} />
+        <div className={userinfoStyle.userInfo}>
+          <b style={{ fontSize: "20px" }}>{data.name}</b>
+          {` @${data.login}`}
+          <br />
+          <FontAwesomeIcon icon={faGithub} />{" "}
+          <a target="_blank" href="https://github.com/littleboycoding">
+            GitHub
+          </a>{" "}
+          <FontAwesomeIcon icon={faFacebook} />{" "}
+          <a target="_blank" href="https://www.facebook.com/littleboycoding">
+            Facebook
+          </a>
+          <p>{data.bio}</p>
         </div>
-      </>
+      </div>
     );
 }
 
