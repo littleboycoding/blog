@@ -8,7 +8,8 @@
     "dev": "next dev",
     "start": "next start",
     "build": "next build",
-    "export": "next export"
+    "export": "next export",
+    "deploy": "mv out/ docs/ && git commit -am 'Deploy to GitHub Pages'"
   },
   "author": "Thanawat Yodnil",
   "license": "ISC",
