@@ -9,7 +9,7 @@
     "start": "next start",
     "build": "next build",
     "export": "next export",
-    "deploy": "mv out/ docs/ && git commit -am 'Deploy to GitHub Pages' && git push origin master"
+    "deploy": "mv out/ docs/ && git add docs/ && git commit -m 'Deploy to GitHub Pages' && git push origin master"
   },
   "author": "Thanawat Yodnil",
   "license": "ISC",
