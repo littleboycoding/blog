@@ -16,6 +16,7 @@ async function fetchData(url) {
 
 function Blog(props) {
   const router = useRouter();
+  console.log(router.query.title);
   const { data, error } = useSWR(
     "/api/fetchContent?title=" + router.query.title,
     fetchData
