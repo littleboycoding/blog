@@ -1,18 +1,13 @@
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import containerStyle from "../css/container.module.css";
-import React, { useState, useEffect } from "react";
-
-const UserInfo = dynamic(() => import("./userinfo"), {
-  loading: () => <h1>{". . ."}</h1>
-});
+import React, { useEffect } from "react";
+const UserInfo = dynamic(() => import("./userinfo"));
 
 function Container(props) {
   const year = new Date().getFullYear();
-  const [title, setTitle] = useState(props.title);
 
   useEffect(() => {
-    document.title = `${title} - Little Boy`;
+    document.title = `${props.title} - Little Boy`;
   });
 
   return (
