@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import Link from "next/link";
 import useSWR from "swr";
+import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
@@ -11,11 +12,12 @@ async function fetchData(url) {
   return await fetch(url).then(res => res.json());
 }
 
-function Blog() {
+function Blog(props) {
   const router = useRouter();
   const { data, error } = useSWR(
     "/api/fetchContent?title=" + router.query.title,
-    fetchData
+    fetchData,
+    { initialData: props.content }
   );
   const title = data ? data.content.split("\n")[0] : "บล็อก";
 
@@ -41,10 +43,23 @@ function Blog() {
         }
       `}</style>
       <Markdown className="markdown">{`${
-        data ? "# " + data.content : "กำลังโหลดเนื้อหา"
+        data
+          ? "# " + data.content
+          : error
+          ? "เกิดข้อผิดพลาดในการเข้าถึงเนื้อหา"
+          : "กำลังโหลดเนื้อหา"
       }`}</Markdown>
     </Container>
   );
+}
+
+export async function unstable_getServerProps(context) {
+  const res = await fetchData(
+    `${process.env.API_URL || "http://localhost:3000"}/api/fetchContent?title=${
+      context.query.title
+    }`
+  );
+  return { props: { content: res } };
 }
 
 export default Blog;

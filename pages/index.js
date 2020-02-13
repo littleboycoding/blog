@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import useSWR from "swr";
+import fetch from "isomorphic-unfetch";
 import React, { Fragment } from "react";
 const Container = dynamic(() => import("../components/container"));
 
@@ -9,7 +10,9 @@ async function fetchData(url) {
 }
 
 function BlogList(props) {
-  const { data, error } = useSWR("/api/fetchBlog", fetchData);
+  const { data, error } = useSWR("/api/fetchBlog", fetchData, {
+    initialData: props.blog
+  });
   if (error) return "เกิดข้อผิดพลาดในขณะกำลังดาวน์โหลดข้อมูล";
   if (!data) return "กำลังโหลดข้อมูล";
   if (data) {
@@ -41,6 +44,13 @@ function Index(props) {
       <BlogList />
     </Container>
   );
+}
+
+export async function unstable_getServerProps(context) {
+  const res = await fetchData(
+    `${process.env.API_URL || "http://localhost:3000"}/api/fetchBlog`
+  );
+  return { props: { blog: res } };
 }
 
 export default Index;
