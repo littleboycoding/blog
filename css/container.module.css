@@ -33,4 +33,7 @@
     position: static;
     transform: translateX(0);
   }
+  .content {
+    padding: 0px 20px 20px 20px;
+  }
 }
