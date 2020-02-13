@@ -40,6 +40,7 @@ function Blog(props) {
           max-height: 450px;
           object-fit: contain;
           background-color: #eee;
+          border: 1px solid #ddd;
         }
       `}</style>
       <Markdown className="markdown">{`${
