@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import fetch from "isomorphic-unfetch";
 import React, { Fragment } from "react";
 
 const Container = dynamic(() => import("../components/container"), {
@@ -7,6 +8,7 @@ const Container = dynamic(() => import("../components/container"), {
 });
 
 function BlogList(props) {
+  console.log(props.blog);
   const list = props.blog.map(blogArray => (
     <Fragment key={blogArray.fileName}>
       <style jsx>{`
@@ -33,18 +35,26 @@ function Index(props) {
   );
 }
 
-export async function unstable_getStaticProps() {
-  const fs = require("fs");
-  const path = require("path");
-  const markdownArray = fs.readdirSync("./markdown");
-  const contentList = markdownArray.map(markdown => ({
-    fileName: path.parse(markdown).name,
-    title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0]
-  }));
+Index.getInitialProps = async () => {
+  const res = await fetch(
+    `http://localhost:${process.env.PORT || 3000}/api/fetchBlog`
+  ).then(res => res.json());
 
-  return {
-    props: { blog: contentList }
-  };
-}
+  return { blog: await res.blog };
+};
+
+//export async function unstable_getStaticProps() {
+//const fs = require("fs");
+//const path = require("path");
+//const markdownArray = fs.readdirSync("./markdown");
+//const contentList = markdownArray.map(markdown => ({
+//fileName: path.parse(markdown).name,
+//title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0]
+//}));
+//
+//return {
+//props: { blog: contentList }
+//};
+//}
 
 export default Index;
