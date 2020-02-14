@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
 const Container = dynamic(() => import("../../components/container"), {
-  loading: "hi"
+  loading: <h1>{". . ."}</h1>
 });
 
 async function fetchData(url) {
@@ -56,11 +56,11 @@ function Blog(props) {
   );
 }
 
-Blog.getInitialProps = async context => {
+export async function unstable_getServerProps(context) {
   const res = await fetchData(
     `${process.env.API_URL}/api/fetchContent?title=${context.query.title}`
   );
-  return { content: res };
-};
+  return { props: { content: res } };
+}
 
 export default Blog;

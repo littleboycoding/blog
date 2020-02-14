@@ -3,7 +3,9 @@ import Link from "next/link";
 import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import React, { Fragment } from "react";
-const Container = dynamic(() => import("../components/container"));
+const Container = dynamic(() => import("../components/container"), {
+  loading: <h1>{". . ."}</h1>
+});
 
 async function fetchData(url) {
   return fetch(url).then(res => res.json());
@@ -46,9 +48,9 @@ function Index(props) {
   );
 }
 
-Index.getInitialProps = async context => {
+export async function unstable_getServerProps(context) {
   const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
-  return { blog: res };
-};
+  return { props: { blog: res } };
+}
 
 export default Index;
