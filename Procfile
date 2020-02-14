@@ -1,1 +1,1 @@
-web: API_URL="https://littleboycoding.herokuapp.com" next start -p $PORT
+web: next start -p $PORT
