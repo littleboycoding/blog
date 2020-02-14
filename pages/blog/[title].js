@@ -6,7 +6,9 @@ import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
-const Container = dynamic(() => import("../../components/container"));
+const Container = dynamic(() => import("../../components/container"), {
+  loading: "hi"
+});
 
 async function fetchData(url) {
   return await fetch(url).then(res => res.json());
@@ -54,13 +56,11 @@ function Blog(props) {
   );
 }
 
-export async function unstable_getServerProps(context) {
+Blog.getInitialProps = async context => {
   const res = await fetchData(
-    `${process.env.API_URL || "http://localhost:3000"}/api/fetchContent?title=${
-      context.query.title
-    }`
+    `${process.env.API_URL}/api/fetchContent?title=${context.query.title}`
   );
-  return { props: { content: res } };
-}
+  return { content: res };
+};
 
 export default Blog;

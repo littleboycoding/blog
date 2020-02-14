@@ -46,11 +46,9 @@ function Index(props) {
   );
 }
 
-export async function unstable_getServerProps(context) {
-  const res = await fetchData(
-    `${process.env.API_URL || "http://localhost:3000"}/api/fetchBlog`
-  );
-  return { props: { blog: res } };
-}
+Index.getInitialProps = async context => {
+  const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
+  return { blog: res };
+};
 
 export default Index;
