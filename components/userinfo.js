@@ -1,6 +1,6 @@
+//import userinfoStyle from "../css/userinfo.module.css";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
-import userinfoStyle from "../css/userinfo.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
 
@@ -16,29 +16,70 @@ function UserInfo(props) {
   );
   if (!data)
     return (
-      <div className={userinfoStyle.userContainer}>
-        <h1>{". . ."}</h1>
-      </div>
+      <>
+        <style jsx>{`
+          .userContainer {
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 50px 15px 50px;
+            display: flex;
+          }
+        `}</style>
+        <div className="userContainer">
+          <h1>{". . ."}</h1>
+        </div>
+      </>
     );
   if (data)
     return (
-      <div className={userinfoStyle.userContainer}>
-        <img className={userinfoStyle.userImage} src={data.avatar_url} />
-        <div className={userinfoStyle.userInfo}>
-          <b style={{ fontSize: "20px" }}>{data.name}</b>
-          {` @${data.login}`}
-          <br />
-          <FontAwesomeIcon icon={faGithub} />{" "}
-          <a target="_blank" href="https://github.com/littleboycoding">
-            GitHub
-          </a>{" "}
-          <FontAwesomeIcon icon={faFacebook} />{" "}
-          <a target="_blank" href="https://www.facebook.com/littleboycoding">
-            Facebook
-          </a>
-          <p>{data.bio}</p>
+      <>
+        <style jsx>{`
+          .userContainer {
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 50px 15px 50px;
+            display: flex;
+          }
+          .userImage {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+          }
+          .userInfo {
+            margin-left: 10px;
+            width: calc(100% - 160px);
+          }
+
+          @media screen and (max-width: 900px) {
+            .userContainer {
+              display: block;
+            }
+            .userInfo {
+              width: 100%;
+              margin-left: 0;
+            }
+            .userImage {
+              margin-bottom: 20px;
+            }
+          }
+        `}</style>
+        <div className="userContainer">
+          <img className="userImage" src={data.avatar_url} />
+          <div className="userInfo">
+            <b style={{ fontSize: "20px" }}>{data.name}</b>
+            {` @${data.login}`}
+            <br />
+            <FontAwesomeIcon icon={faGithub} />{" "}
+            <a target="_blank" href="https://github.com/littleboycoding">
+              GitHub
+            </a>{" "}
+            <FontAwesomeIcon icon={faFacebook} />{" "}
+            <a target="_blank" href="https://www.facebook.com/littleboycoding">
+              Facebook
+            </a>
+            <p>{data.bio}</p>
+          </div>
         </div>
-      </div>
+      </>
     );
 }
 
