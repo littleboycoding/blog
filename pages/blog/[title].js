@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
 const Container = dynamic(() => import("../../components/container"), {
-  loading: <h1>{". . ."}</h1>
+  loading: () => <h1>{". . ."}</h1>
 });
 
 async function fetchData(url) {
@@ -56,11 +56,23 @@ function Blog(props) {
   );
 }
 
-export async function unstable_getServerProps(context) {
+export async function unstable_getStaticProps({ params }) {
   const res = await fetchData(
-    `${process.env.API_URL}/api/fetchContent?title=${context.query.title}`
+    `${process.env.API_URL}/api/fetchContent?title=${params.title}`
   );
   return { props: { content: res } };
+}
+
+export async function unstable_getStaticPaths() {
+  const staticPaths = { paths: [] };
+  const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
+  res.blog.forEach(markdown =>
+    staticPaths.paths.push({
+      params: { title: markdown.fileName }
+    })
+  );
+
+  return staticPaths;
 }
 
 export default Blog;

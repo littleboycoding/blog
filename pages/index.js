@@ -4,7 +4,7 @@ import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import React, { Fragment } from "react";
 const Container = dynamic(() => import("../components/container"), {
-  loading: <h1>{". . ."}</h1>
+  loading: () => <h1>{". . ."}</h1>
 });
 
 async function fetchData(url) {
@@ -48,7 +48,7 @@ function Index(props) {
   );
 }
 
-export async function unstable_getServerProps(context) {
+export async function unstable_getStaticProps() {
   const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
   return { props: { blog: res } };
 }
