@@ -3,6 +3,7 @@ import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import UserinfoStyle from "../css/userinfo";
 
 async function fetchData(url) {
   //Fetch GitHub user info api
@@ -17,13 +18,7 @@ function UserInfo(props) {
   if (!data)
     return (
       <>
-        <style jsx>{`
-          .userContainer {
-            border-bottom: 1px dashed #ccc;
-            padding: 15px 50px 15px 50px;
-            display: flex;
-          }
-        `}</style>
+        <UserinfoStyle />
         <div className="userContainer">
           <h1>{". . ."}</h1>
         </div>
@@ -32,36 +27,7 @@ function UserInfo(props) {
   if (data)
     return (
       <>
-        <style jsx>{`
-          .userContainer {
-            border-bottom: 1px dashed #ccc;
-            padding: 15px 50px 15px 50px;
-            display: flex;
-          }
-          .userImage {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 5px;
-          }
-          .userInfo {
-            margin-left: 10px;
-            width: calc(100% - 160px);
-          }
-
-          @media screen and (max-width: 900px) {
-            .userContainer {
-              display: block;
-            }
-            .userInfo {
-              width: 100%;
-              margin-left: 0;
-            }
-            .userImage {
-              margin-bottom: 20px;
-            }
-          }
-        `}</style>
+        <UserinfoStyle />
         <div className="userContainer">
           <img className="userImage" src={data.avatar_url} />
           <div className="userInfo">
