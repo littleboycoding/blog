@@ -2,9 +2,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-async function fetchData(url) {
+function fetchData(url) {
   return fetch(url).then(res => res.json());
 }
 
@@ -13,7 +15,13 @@ function BlogList(props) {
     initialData: props.blog
   });
   if (error) return "เกิดข้อผิดพลาดในขณะกำลังดาวน์โหลดข้อมูล";
-  if (!data) return "กำลังโหลดข้อมูล";
+  if (!data)
+    return (
+      <>
+        <FontAwesomeIcon icon={faSpinner} />
+        {" กำลังโหลดข้อมูล"}
+      </>
+    );
   if (data) {
     const list =
       data.blog.length > 0

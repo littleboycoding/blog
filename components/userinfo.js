@@ -1,4 +1,3 @@
-//import userinfoStyle from "../css/userinfo.module.css";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

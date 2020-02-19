@@ -1,7 +1,7 @@
 import "../css/main.css";
 import Container from "../components/container";
 import Router from "next/router";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,7 +9,9 @@ export default ({ Component, pageProps }) => {
   const [isLoading, setLoadingState] = useState(false);
 
   useEffect(() => {
-    document.title = pageProps.title + " - Little Boy";
+    document.title = pageProps.title
+      ? `${pageProps.title} - Little Boy`
+      : `เว็บไซต์บล็อกของ Little Boy`;
 
     Router.events.on("routeChangeStart", url => {
       setLoadingState(true);
@@ -35,7 +37,7 @@ export default ({ Component, pageProps }) => {
       ) : (
         <p {...pageProps}>
           <FontAwesomeIcon icon={faSpinner} />
-          {" กำลังโหลดเนื้อหา"}
+          {" กำลังโหลดข้อมูล"}
         </p>
       )}
     </Container>

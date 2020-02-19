@@ -5,10 +5,13 @@ import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretSquareLeft,
+  faSpinner
+} from "@fortawesome/free-solid-svg-icons";
 
-async function fetchData(url) {
-  return await fetch(url).then(res => res.json());
+function fetchData(url) {
+  return fetch(url).then(res => res.json());
 }
 
 function Blog(props) {
@@ -18,7 +21,7 @@ function Blog(props) {
     fetchData,
     { initialData: props.content }
   );
-  const title = data ? data.content.split("\n")[0] : "บล็อก";
+  const title = data ? data.content.split("\n")[0] : "กำลังโหลด";
 
   return (
     <>
@@ -43,11 +46,15 @@ function Blog(props) {
         }
       `}</style>
       <Markdown className="markdown">{`${
-        data
-          ? "# " + data.content
-          : error
-          ? "เกิดข้อผิดพลาดในการเข้าถึงเนื้อหา"
-          : "กำลังโหลดเนื้อหา"
+        data ? (
+          "# " + data.content
+        ) : error ? (
+          "เกิดข้อผิดพลาดในการเข้าถึงเนื้อหา"
+        ) : (
+          <>
+            <FontAwesomeIcon icon={faSpinner} /> + {" กำลังโหลดเนื้อหา"}
+          </>
+        )
       }`}</Markdown>
     </>
   );

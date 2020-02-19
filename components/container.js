@@ -1,7 +1,6 @@
-//import containerStyle from "../css/container.module.css";
 import dynamic from "next/dynamic";
 import Router from "next/router";
-const UserInfo = dynamic(() => import("./userinfo"));
+import UserInfo from "./userinfo";
 import ContainerStyle from "../css/container.js";
 
 function Container(props) {
