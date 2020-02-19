@@ -11,12 +11,11 @@ export default ({ Component, pageProps }) => {
   const router = useRouter();
   const baseURL = "https://www.littleboycoding.herokuapp.com";
   const title = router.asPath == "/" ? "หน้าแรก" : pageProps.title;
+  const siteTitle = pageProps.title
+    ? `${pageProps.title} - Little Boy`
+    : `เว็บไซต์บล็อกของ Little Boy`;
 
   useEffect(() => {
-    document.title = pageProps.title
-      ? `${pageProps.title} - Little Boy`
-      : `เว็บไซต์บล็อกของ Little Boy`;
-
     Router.events.on("routeChangeStart", url => {
       setLoadingState(true);
     });
@@ -37,20 +36,25 @@ export default ({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <title key="title">{siteTitle}</title>
         <meta
-          key="title"
+          key="og:title"
           property="og:title"
           content={`${title} - Little Boy`}
         />
         <meta
-          key="image"
+          key="og:image"
           property="og:image"
           content="https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
         />
-        <meta key="url" property="og:url" content={baseURL + router.asPath} />
-        <meta property="og:type" content="article" />
         <meta
-          key="description"
+          key="og:url"
+          property="og:url"
+          content={baseURL + router.asPath}
+        />
+        <meta key="og:type" property="og:type" content="article" />
+        <meta
+          key="og:description"
           property="og:description"
           content="เว็บบล็อกเล็กๆของนักพัฒนา 💻 ที่ชอบค้นหาสิ่งใหม่ๆ และทำเพื่ออุดมกาณ์ตัวเอง"
         />
