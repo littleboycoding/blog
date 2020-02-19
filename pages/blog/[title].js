@@ -6,9 +6,6 @@ import fetch from "isomorphic-unfetch";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareLeft } from "@fortawesome/free-solid-svg-icons";
-const Container = dynamic(() => import("../../components/container"), {
-  loading: () => <h1>{". . ."}</h1>
-});
 
 async function fetchData(url) {
   return await fetch(url).then(res => res.json());
@@ -24,7 +21,7 @@ function Blog(props) {
   const title = data ? data.content.split("\n")[0] : "บล็อก";
 
   return (
-    <Container title={title}>
+    <>
       <style jsx>{`
         span:hover {
           text-decoration: underline !important;
@@ -52,7 +49,7 @@ function Blog(props) {
           ? "เกิดข้อผิดพลาดในการเข้าถึงเนื้อหา"
           : "กำลังโหลดเนื้อหา"
       }`}</Markdown>
-    </Container>
+    </>
   );
 }
 
@@ -60,7 +57,8 @@ export async function unstable_getStaticProps({ params }) {
   const res = await fetchData(
     `${process.env.API_URL}/api/fetchContent?title=${params.title}`
   );
-  return { props: { content: res } };
+  const title = res.content.split("\n")[0];
+  return { props: { content: res, title: title } };
 }
 
 export async function unstable_getStaticPaths() {

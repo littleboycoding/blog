@@ -1,42 +1,43 @@
 import "../css/main.css";
-import React, { useState } from "react";
+import Container from "../components/container";
 import Router from "next/router";
-
-const AppStyle = () => (
-  <style jsx>
-    {`
-      .loadingDIV {
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        background-color: black;
-        opacity: 0.08;
-        transition: all 1s;
-        z-index: 2;
-      }
-    `}
-  </style>
-);
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default ({ Component, pageProps }) => {
   const [isLoading, setLoadingState] = useState(false);
-  routerEvent(setLoadingState);
+
+  useEffect(() => {
+    document.title = pageProps.title + " - Little Boy";
+
+    Router.events.on("routeChangeStart", url => {
+      setLoadingState(true);
+    });
+    Router.events.on("routeChangeComplete", url => {
+      setLoadingState(false);
+    });
+
+    return () => {
+      Router.events.off("routeChangeStart", url => {
+        setLoadingState(true);
+      });
+      Router.events.off("routeChangeComplete", url => {
+        setLoadingState(false);
+      });
+    };
+  });
 
   return (
-    <>
-      <AppStyle />
-      {isLoading ? <div className="loadingDIV"></div> : null}
-      <Component {...pageProps} />
-    </>
+    <Container>
+      {!isLoading ? (
+        <Component {...pageProps} />
+      ) : (
+        <p {...pageProps}>
+          <FontAwesomeIcon icon={faSpinner} />
+          {" กำลังโหลดเนื้อหา"}
+        </p>
+      )}
+    </Container>
   );
 };
-
-function routerEvent(setter) {
-  const events = Router.events.on;
-  events("routeChangeStart", () => {
-    setter(true);
-  });
-  events("routeChangeComplete", () => {
-    setter(false);
-  });
-}

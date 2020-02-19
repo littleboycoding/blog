@@ -18,7 +18,7 @@ function UserInfo(props) {
   if (!data)
     return (
       <>
-        <UserinfoStyle />
+        <style jsx>{UserinfoStyle}</style>
         <div className="userContainer">
           <h1>{". . ."}</h1>
         </div>
@@ -27,7 +27,7 @@ function UserInfo(props) {
   if (data)
     return (
       <>
-        <UserinfoStyle />
+        <style jsx>{UserinfoStyle}</style>
         <div className="userContainer">
           <img className="userImage" src={data.avatar_url} />
           <div className="userInfo">

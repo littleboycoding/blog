@@ -1,19 +1,15 @@
 //import containerStyle from "../css/container.module.css";
 import dynamic from "next/dynamic";
-import React, { useEffect } from "react";
+import Router from "next/router";
 const UserInfo = dynamic(() => import("./userinfo"));
 import ContainerStyle from "../css/container.js";
 
 function Container(props) {
   const year = new Date().getFullYear();
 
-  useEffect(() => {
-    document.title = `${props.title} - Little Boy`;
-  });
-
   return (
     <>
-      <ContainerStyle />
+      <style jsx>{ContainerStyle}</style>
       <div className="container">
         <UserInfo />
         <div className="content">{props.children}</div>

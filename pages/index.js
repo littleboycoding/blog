@@ -3,9 +3,6 @@ import Link from "next/link";
 import useSWR from "swr";
 import fetch from "isomorphic-unfetch";
 import React, { Fragment } from "react";
-const Container = dynamic(() => import("../components/container"), {
-  loading: () => <h1>{". . ."}</h1>
-});
 
 async function fetchData(url) {
   return fetch(url).then(res => res.json());
@@ -41,16 +38,16 @@ function BlogList(props) {
 
 function Index(props) {
   return (
-    <Container title="หน้าหลัก">
+    <>
       <h1>📰 Blog</h1>
       <BlogList />
-    </Container>
+    </>
   );
 }
 
 export async function unstable_getStaticProps() {
   const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
-  return { props: { blog: res } };
+  return { props: { blog: res, title: "หน้าหลัก" } };
 }
 
 export default Index;
