@@ -9,7 +9,7 @@ import Head from "next/head";
 export default ({ Component, pageProps }) => {
   const [isLoading, setLoadingState] = useState(false);
   const router = useRouter();
-  const baseURL = "https://www.littleboycoding.herokuapp.com";
+  const baseURL = "https://littleboycoding.herokuapp.com";
   const title = router.asPath == "/" ? "หน้าแรก" : pageProps.title;
   const siteTitle = pageProps.title
     ? `${pageProps.title} - Little Boy`
