@@ -73,7 +73,6 @@ export async function unstable_getStaticProps({ params }) {
   let thumbnail = res.content.split("\n")[1];
   thumbnail = thumbnail.replace(/^.*.\(/, "");
   thumbnail = thumbnail.slice(0, thumbnail.length - 1);
-  console.log(thumbnail);
 
   return { props: { content: res, title: title, thumbnail: thumbnail } };
 }
