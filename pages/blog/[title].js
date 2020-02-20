@@ -44,6 +44,11 @@ function Blog(props) {
           background-color: #eee;
           border: 1px solid #ddd;
         }
+        .markdown p img + em {
+          display: block;
+          text-align: center;
+          color: #999;
+        }
       `}</style>
       <Markdown className="markdown">{`${
         data ? (
@@ -65,7 +70,12 @@ export async function unstable_getStaticProps({ params }) {
     `${process.env.API_URL}/api/fetchContent?title=${params.title}`
   );
   const title = res.content.split("\n")[0];
-  return { props: { content: res, title: title } };
+  let thumbnail = res.content.split("\n")[1];
+  thumbnail = thumbnail.replace(/^.*.\(/, "");
+  thumbnail = thumbnail.slice(0, thumbnail.length - 1);
+  console.log(thumbnail);
+
+  return { props: { content: res, title: title, thumbnail: thumbnail } };
 }
 
 export async function unstable_getStaticPaths() {

@@ -45,7 +45,11 @@ export default ({ Component, pageProps }) => {
         <meta
           key="og:image"
           property="og:image"
-          content="https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
+          content={
+            pageProps.thumbnail
+              ? baseURL + pageProps.thumbnail
+              : "https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
+          }
         />
         <meta
           key="og:url"
