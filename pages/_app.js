@@ -16,18 +16,18 @@ export default ({ Component, pageProps }) => {
     : `เว็บไซต์บล็อกของ Little Boy`;
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", url => {
+    Router.events.on("routeChangeStart", (url) => {
       setLoadingState(true);
     });
-    Router.events.on("routeChangeComplete", url => {
+    Router.events.on("routeChangeComplete", (url) => {
       setLoadingState(false);
     });
 
     return () => {
-      Router.events.off("routeChangeStart", url => {
+      Router.events.off("routeChangeStart", (url) => {
         setLoadingState(true);
       });
-      Router.events.off("routeChangeComplete", url => {
+      Router.events.off("routeChangeComplete", (url) => {
         setLoadingState(false);
       });
     };
@@ -46,8 +46,11 @@ export default ({ Component, pageProps }) => {
           key="og:image"
           property="og:image"
           content={
-            pageProps.thumbnail ? pageProps.thumbnail.search("http") === 0 ? pageProps.thumbnail :
-              baseURL + pageProps.thumbnail : "https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
+            pageProps.thumbnail
+              ? pageProps.thumbnail.search("http") === 0
+                ? pageProps.thumbnail
+                : baseURL + pageProps.thumbnail
+              : "https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
           }
         />
         <meta
