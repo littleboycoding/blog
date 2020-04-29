@@ -7,21 +7,18 @@ import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretSquareLeft,
-  faSpinner
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 function fetchData(url) {
-  return fetch(url).then(res => res.json());
+  return fetch(url).then((res) => res.json());
 }
 
 function Blog(props) {
   const router = useRouter();
-  const { data, error } = useSWR(
-    "/api/fetchContent?title=" + router.query.title,
-    fetchData,
-    { initialData: props.content }
-  );
-  const title = data ? data.content.split("\n")[0] : "กำลังโหลด";
+
+  const data = props;
+  const title = data.content.split("\n")[0];
 
   return (
     <>
@@ -50,39 +47,42 @@ function Blog(props) {
           color: #999;
         }
       `}</style>
-      <Markdown className="markdown">{`${
-        data ? (
-          "# " + data.content
-        ) : error ? (
-          "เกิดข้อผิดพลาดในการเข้าถึงเนื้อหา"
-        ) : (
-          <>
-            <FontAwesomeIcon icon={faSpinner} /> + {" กำลังโหลดเนื้อหา"}
-          </>
-        )
-      }`}</Markdown>
+      <Markdown className="markdown">{"# " + data.content}</Markdown>
     </>
   );
 }
 
-export async function unstable_getStaticProps({ params }) {
-  const res = await fetchData(
-    `${process.env.API_URL}/api/fetchContent?title=${params.title}`
+export async function getStaticProps({ params }) {
+  const fs = require("fs");
+  const resultMarkdown = fs.readFileSync(
+    `./markdown/${params.title}.md`,
+    "utf8"
   );
-  const title = res.content.split("\n")[0];
-  let thumbnail = res.content.split("\n")[1];
+
+  const title = resultMarkdown.split("\n")[0];
+  let thumbnail = resultMarkdown.split("\n")[1];
   thumbnail = thumbnail.replace(/^.*.\(/, "");
   thumbnail = thumbnail.slice(0, thumbnail.length - 1);
 
-  return { props: { content: res, title: title, thumbnail: thumbnail } };
+  return {
+    props: { content: resultMarkdown, title: title, thumbnail: thumbnail },
+  };
 }
 
-export async function unstable_getStaticPaths() {
-  const staticPaths = { paths: [] };
-  const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
-  res.blog.forEach(markdown =>
+export async function getStaticPaths() {
+  const staticPaths = { paths: [], fallback: false };
+
+  const fs = require("fs");
+  const path = require("path");
+  const markdownArray = fs.readdirSync("./markdown");
+  const contentList = markdownArray.map((markdown) => ({
+    fileName: path.parse(markdown).name,
+    title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0],
+  }));
+
+  contentList.forEach((markdown) =>
     staticPaths.paths.push({
-      params: { title: markdown.fileName }
+      params: { title: markdown.fileName },
     })
   );
 
