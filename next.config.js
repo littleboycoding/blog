@@ -8,6 +8,6 @@ module.exports = (phase, { defaultConfig }) => {
   }
   return {
     exportTrailingSlash: true,
-    env: { API_URL: "https://littleboycoding.herokuapp.com" }
+    env: { API_URL: "https://littleboycoding.now.sh" }
   };
 };
