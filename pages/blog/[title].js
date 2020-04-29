@@ -1,22 +1,12 @@
-import dynamic from "next/dynamic";
 import Markdown from "react-markdown";
 import Link from "next/link";
-import useSWR from "swr";
-import fetch from "isomorphic-unfetch";
-import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretSquareLeft,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
-function fetchData(url) {
-  return fetch(url).then((res) => res.json());
-}
-
 function Blog(props) {
-  const router = useRouter();
-
   const data = props;
   const title = data.content.split("\n")[0];
 

@@ -1,14 +1,7 @@
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import useSWR from "swr";
-import fetch from "isomorphic-unfetch";
 import { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-
-function fetchData(url) {
-  return fetch(url).then((res) => res.json());
-}
 
 function BlogList({ data }) {
   const list =
@@ -41,8 +34,6 @@ function Index(props) {
 }
 
 export async function getStaticProps() {
-  const res = await fetchData(`${process.env.API_URL}/api/fetchBlog`);
-
   const fs = require("fs");
   const path = require("path");
   const markdownArray = fs.readdirSync("./markdown");
