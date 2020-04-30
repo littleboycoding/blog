@@ -28,7 +28,7 @@ function BlogList({ data }) {
 function Index(props) {
   return (
     <>
-      <OpenGraph title={"เว็บไซต์บล็อกของ"} baseurl={props.baseURL} />
+      <OpenGraph title={"เว็บไซต์บล็อกของ"} baseurl={props.baseurl} />
       <h1>📰 Blog</h1>
       <BlogList data={props} />
     </>

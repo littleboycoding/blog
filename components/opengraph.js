@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 function OpenGraph(props) {
   const router = useRouter();
-  const baseURL = props.baseurl;
+  console.log(router.asPath);
   const title = props.title
     ? `${props.title} - Little Boy`
     : `เว็บไซต์บล็อกของ Little Boy`;
@@ -19,11 +19,15 @@ function OpenGraph(props) {
           props.thumbnail
             ? props.thumbnail.search("http") === 0
               ? props.thumbnail
-              : baseURL + props.thumbnail
+              : props.baseurl + props.thumbnail
             : "https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
         }
       />
-      <meta key="og:url" property="og:url" content={baseURL + router.asPath} />
+      <meta
+        key="og:url"
+        property="og:url"
+        content={props.baseurl + router.asPath}
+      />
       <meta key="og:type" property="og:type" content="article" />
       <meta
         key="og:description"
