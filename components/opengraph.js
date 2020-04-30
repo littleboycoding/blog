@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 function OpenGraph(props) {
   const router = useRouter();
-  console.log(router.asPath);
   const title = props.title
     ? `${props.title} - Little Boy`
     : `เว็บไซต์บล็อกของ Little Boy`;
