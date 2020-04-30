@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import OpenGraph from "../components/opengraph.js";
 
 function BlogList({ data }) {
   const list =
@@ -27,6 +28,7 @@ function BlogList({ data }) {
 function Index(props) {
   return (
     <>
+      <OpenGraph title={"เว็บไซต์บล็อกของ"} baseurl={props.baseURL} />
       <h1>📰 Blog</h1>
       <BlogList data={props} />
     </>
@@ -42,7 +44,12 @@ export async function getStaticProps() {
     title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0],
   }));
 
-  return { props: { blog: contentList, title: "หน้าหลัก" } };
+  return {
+    props: {
+      blog: contentList,
+      baseurl: process.env.API_URL,
+    },
+  };
 }
 
 export default Index;

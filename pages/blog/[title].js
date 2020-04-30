@@ -1,17 +1,17 @@
 import Markdown from "react-markdown";
 import Link from "next/link";
+import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretSquareLeft,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
+import OpenGraph from "../../components/opengraph.js";
 
 function Blog(props) {
-  const data = props;
-  const title = data.content.split("\n")[0];
-
   return (
     <>
+      <OpenGraph {...props} />
       <style jsx>{`
         span:hover {
           text-decoration: underline !important;
@@ -37,7 +37,7 @@ function Blog(props) {
           color: #999;
         }
       `}</style>
-      <Markdown className="markdown">{"# " + data.content}</Markdown>
+      <Markdown className="markdown">{"# " + props.content}</Markdown>
     </>
   );
 }
@@ -55,13 +55,16 @@ export async function getStaticProps({ params }) {
   thumbnail = thumbnail.slice(0, thumbnail.length - 1);
 
   return {
-    props: { content: resultMarkdown, title: title, thumbnail: thumbnail },
+    props: {
+      content: resultMarkdown,
+      title: title,
+      thumbnail: thumbnail,
+      baseurl: process.env.API_URL,
+    },
   };
 }
 
 export async function getStaticPaths() {
-  const staticPaths = { paths: [], fallback: false };
-
   const fs = require("fs");
   const path = require("path");
   const markdownArray = fs.readdirSync("./markdown");
@@ -69,6 +72,8 @@ export async function getStaticPaths() {
     fileName: path.parse(markdown).name,
     title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0],
   }));
+
+  const staticPaths = { paths: [], fallback: false };
 
   contentList.forEach((markdown) =>
     staticPaths.paths.push({
