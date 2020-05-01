@@ -7,6 +7,20 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import OpenGraph from "../../components/opengraph.js";
+const monthName = [
+  "มกราคม",
+  "กุมภาพันธ์",
+  "มีนาคม",
+  "เมษายน",
+  "พฤษภาคม",
+  "มิถุนายน",
+  "กรกฎาคม",
+  "สิงหาคม",
+  "กันยายน",
+  "ตุลาคม",
+  "พฤศจิกายน",
+  "ธันวาคม",
+];
 
 function Blog(props) {
   return (
@@ -37,7 +51,7 @@ function Blog(props) {
           color: #999;
         }
       `}</style>
-      <Markdown className="markdown">{"# " + props.content}</Markdown>
+      <Markdown className="markdown">{`# ${props.title}\n📅 ${props.date}\n${props.content}`}</Markdown>
     </>
   );
 }
@@ -48,16 +62,26 @@ export async function getStaticProps({ params }) {
     `./markdown/${params.title}.md`,
     "utf8"
   );
+  const createDate = new Date(
+    fs.statSync("./markdown/" + params.title + ".md").birthtime
+  );
+  const parsedDate = `${createDate.getDate()} ${
+    monthName[createDate.getMonth()]
+  } ${createDate.getFullYear() + 543}`;
 
   const title = resultMarkdown.split("\n")[0];
+  const content = resultMarkdown.split("\n");
+  content.splice(0, 1);
+
   let thumbnail = resultMarkdown.split("\n")[1];
   thumbnail = thumbnail.replace(/^.*.\(/, "");
   thumbnail = thumbnail.slice(0, thumbnail.length - 1);
 
   return {
     props: {
-      content: resultMarkdown,
+      content: content.map((map) => "\n" + map).join(""),
       title: title,
+      date: parsedDate,
       thumbnail: thumbnail,
       baseurl: process.env.API_URL,
     },

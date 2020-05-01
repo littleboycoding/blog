@@ -13,15 +13,28 @@ function Container(props) {
         <div className="content">{props.children}</div>
         <div className="footer">
           <p>
-            <a
-              target="_blank"
-              href="https://en.wikipedia.org/wiki/Creative_Commons_license"
-            >
-              Creative Common License
+            Created with
+            <br />
+            🧰 Framework{" "}
+            <a target="_blank" href="https://nextjs.org/">
+              Next.js
             </a>
-            {` @${year} 📝`}
+            , 📑 Editor{" "}
+            <a target="_blank" href="https://neovim.io/">
+              Neovim
+            </a>
+            , 🗺️ Hosted on{" "}
+            <a target="_blank" href="https://netlify.com">
+              Netlify
+            </a>{" "}
+            And ❤️
+            <br />
+            <br />©{" "}
+            <a target="_blank" href="https://unlicense.org/" target="_blank">
+              Unlicense
+            </a>{" "}
+            Since 2562
           </p>
-          <p>Created with ♥️ by Thanawat Yodnil</p>
         </div>
       </div>
     </>
