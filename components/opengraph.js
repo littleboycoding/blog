@@ -10,6 +10,7 @@ function OpenGraph(props) {
   return (
     <Head>
       <title key="title">{title}</title>
+      <meta name="keywords" content={title} />
       <meta key="og:title" property="og:title" content={title} />
       <meta
         key="og:image"
