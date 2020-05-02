@@ -1,4 +1,4 @@
-import Markdown from "react-markdown";
+import Markdown from "react-markdown/with-html";
 import Link from "next/link";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,8 @@ import {
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import OpenGraph from "../../components/opengraph.js";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
 const monthName = [
   "มกราคม",
   "กุมภาพันธ์",
@@ -51,7 +53,19 @@ function Blog(props) {
           color: #999;
         }
       `}</style>
-      <Markdown className="markdown">{`# ${props.title}\n📅 ${props.date}\n${props.content}`}</Markdown>
+      <Markdown
+        source={`# ${props.title}\n📅 ${props.date}\n${props.content}`}
+        renderers={{
+          code: (props) => (
+            <SyntaxHighlighter
+              language={props.language}
+              children={props.value}
+            />
+          ),
+        }}
+        escapeHtml={false}
+        className="markdown"
+      />
     </>
   );
 }
