@@ -60,6 +60,7 @@ function Blog(props) {
             <SyntaxHighlighter
               language={props.language}
               children={props.value}
+              showLineNumbers={true}
             />
           ),
         }}
