@@ -28,7 +28,7 @@ function BlogList({ data }) {
 function Index(props) {
   return (
     <>
-      <OpenGraph title={"เว็บไซต์บล็อกของ"} baseurl={props.baseurl} />
+      <OpenGraph title={"My personal blog 🔥🚀🎉"} baseurl={props.baseurl} />
       <h1>📰 Blog</h1>
       <BlogList data={props} />
     </>
@@ -39,6 +39,13 @@ export async function getStaticProps() {
   const fs = require("fs");
   const path = require("path");
   const markdownArray = fs.readdirSync("./markdown");
+  //Sort by creation date
+  markdownArray.sort((a, b) => {
+    return (
+      fs.statSync("./markdown/" + b).mtime.getTime() -
+      fs.statSync("./markdown/" + a).mtime.getTime()
+    );
+  });
   const contentList = markdownArray.map((markdown) => ({
     fileName: path.parse(markdown).name,
     title: fs.readFileSync(`./markdown/${markdown}`, "utf8").split("\n")[0],

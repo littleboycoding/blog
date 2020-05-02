@@ -3,14 +3,18 @@ import { useRouter } from "next/router";
 
 function OpenGraph(props) {
   const router = useRouter();
-  const title = props.title
-    ? `${props.title} - Little Boy Coding`
-    : `หน้าแรก - Little Boy Coding`;
+  const title = props.title + " - Little Boy Coding";
 
   return (
     <Head>
       <title key="title">{title}</title>
-      <meta name="keywords" content={title} />
+      <meta
+        name="keywords"
+        content={
+          title +
+          ", littleboycoding, Little Boy Coding, การสร้างเว็บไซต์, blog, Thanawat Yodnil"
+        }
+      />
       <meta key="og:title" property="og:title" content={title} />
       <meta
         key="og:image"

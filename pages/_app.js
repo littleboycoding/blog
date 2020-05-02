@@ -4,6 +4,7 @@ import Router from "next/router";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import Head from "next/head";
 
 export default ({ Component, pageProps }) => {
   const [isLoading, setLoadingState] = useState(false);
@@ -35,6 +36,9 @@ export default ({ Component, pageProps }) => {
           <p {...pageProps}>
             <FontAwesomeIcon icon={faSpinner} />
             {" กำลังโหลดข้อมูล"}
+            <Head>
+              <title>กำลังโหลดข้อมูล... - Little Boy Coding</title>
+            </Head>
           </p>
         )}
       </Container>
