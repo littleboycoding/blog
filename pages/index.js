@@ -42,8 +42,8 @@ export async function getStaticProps() {
   //Sort by creation date
   markdownArray.sort((a, b) => {
     return (
-      fs.statSync("./markdown/" + b).mtime.getTime() -
-      fs.statSync("./markdown/" + a).mtime.getTime()
+      fs.statSync("./markdown/" + a).mtime.getTime() -
+      fs.statSync("./markdown/" + b).mtime.getTime()
     );
   });
   const contentList = markdownArray.map((markdown) => ({
