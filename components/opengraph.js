@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 function OpenGraph(props) {
   const router = useRouter();
   const title = props.title
-    ? `${props.title} - Little Boy`
-    : `เว็บไซต์บล็อกของ Little Boy`;
+    ? `${props.title} - Little Boy Coding`
+    : `หน้าแรก - Little Boy Coding`;
 
   return (
     <Head>
