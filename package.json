@@ -24,6 +24,7 @@
     "react-dom": "^16.13.1",
     "react-markdown": "^4.3.1",
     "react-syntax-highlighter": "^12.2.1",
+    "remove-markdown": "^0.3.0",
     "spin.js": "^4.1.0",
     "swr": "^0.2.0"
   }

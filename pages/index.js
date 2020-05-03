@@ -28,7 +28,7 @@ function BlogList({ data }) {
 function Index(props) {
   return (
     <>
-      <OpenGraph baseurl={props.baseurl} />
+      <OpenGraph baseurl={props.baseurl} description={props.description} />
       <h1>📰 BLOG</h1>
       <BlogList data={props} />
     </>
@@ -60,6 +60,12 @@ export async function getStaticProps() {
     props: {
       blog: contentList,
       baseurl: process.env.API_URL,
+      description:
+        "Latest blog - " +
+        contentList
+          .map((map) => map.title)
+          .splice(0, 10)
+          .join(", "),
     },
   };
 }

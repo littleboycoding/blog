@@ -46,7 +46,7 @@ function Blog(props) {
           background-color: #eee;
           border: 1px solid #ddd;
         }
-        .markdown p img + em {
+        .imgCaption {
           display: block;
           text-align: center;
           color: #999;
@@ -62,6 +62,14 @@ function Blog(props) {
               showLineNumbers={true}
             />
           ),
+          image: (props) => {
+            return (
+              <>
+                <img src={props.src} alt={props.alt} />
+                <span className="imgCaption">{props.alt}</span>
+              </>
+            );
+          },
         }}
         escapeHtml={false}
         className="markdown"
@@ -91,6 +99,22 @@ export async function getStaticProps({ params }) {
 
   content.splice(0, 2);
 
+  //Description
+  let description = [...content];
+  description = description.join("\n");
+
+  const rmMD = require("remove-markdown");
+  description = rmMD(description);
+
+  description = description
+    .split("\n")
+    .filter((filter) => filter !== "")
+    .join(" ");
+
+  if (description.length > 160) {
+    description = description.slice(0, 160) + "...";
+  }
+
   return {
     props: {
       content: content.map((map) => "\n" + map).join(""),
@@ -98,6 +122,7 @@ export async function getStaticProps({ params }) {
       date: parsedDate,
       thumbnail: thumbnail,
       baseurl: process.env.API_URL,
+      description: description,
     },
   };
 }

@@ -10,9 +10,12 @@ function OpenGraph(props) {
   return (
     <Head>
       <title key="title">{title}</title>
+      <meta key="description" name="description" content={props.description} />
+      <meta key="author" name="author" content="Thanawat Yodnil" />
       <meta
         name="keywords"
-        content={"การสร้างเว็บไซต์, blog, Thanawat Yodnil"}
+        key="keywords"
+        content={("การสร้างเว็บไซต์, blog, Thanawat Yodnil", "web developer")}
       />
       <meta key="og:title" property="og:title" content={title} />
       <meta
