@@ -28,8 +28,8 @@ function BlogList({ data }) {
 function Index(props) {
   return (
     <>
-      <OpenGraph title={"My personal blog 🔥🚀🎉"} baseurl={props.baseurl} />
-      <h1>📰 Blog</h1>
+      <OpenGraph baseurl={props.baseurl} />
+      <h1>📰 BLOG</h1>
       <BlogList data={props} />
     </>
   );
@@ -41,10 +41,15 @@ export async function getStaticProps() {
   const markdownArray = fs.readdirSync("./markdown");
   //Sort by creation date
   markdownArray.sort((a, b) => {
-    return (
-      fs.statSync("./markdown/" + a).mtime.getTime() -
-      fs.statSync("./markdown/" + b).mtime.getTime()
-    );
+    let A = fs
+      .readFileSync("./markdown/" + a, { encoding: "utf8" })
+      .split("\n")[1]
+      .split("/");
+    let B = fs
+      .readFileSync("./markdown/" + b, { encoding: "utf8" })
+      .split("\n")[1]
+      .split("/");
+    return new Date(B[2], B[1], B[0]) - new Date(A[2], A[1], A[0]);
   });
   const contentList = markdownArray.map((markdown) => ({
     fileName: path.parse(markdown).name,

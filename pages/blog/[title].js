@@ -1,6 +1,5 @@
 import Markdown from "react-markdown/with-html";
 import Link from "next/link";
-import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretSquareLeft,
@@ -77,20 +76,20 @@ export async function getStaticProps({ params }) {
     `./markdown/${params.title}.md`,
     "utf8"
   );
-  const createDate = new Date(
-    fs.statSync("./markdown/" + params.title + ".md").birthtime
-  );
+  let createDate = resultMarkdown.split("\n")[1].split("/");
+  createDate = new Date(createDate[2], createDate[1], createDate[0]);
   const parsedDate = `${createDate.getDate()} ${
-    monthName[createDate.getMonth()]
+    monthName[createDate.getMonth() - 1]
   } ${createDate.getFullYear() + 543}`;
 
   const title = resultMarkdown.split("\n")[0];
   const content = resultMarkdown.split("\n");
-  content.splice(0, 1);
 
-  let thumbnail = resultMarkdown.split("\n")[1];
+  let thumbnail = resultMarkdown.split("\n")[2];
   thumbnail = thumbnail.replace(/^.*.\(/, "");
   thumbnail = thumbnail.slice(0, thumbnail.length - 1);
+
+  content.splice(0, 2);
 
   return {
     props: {
