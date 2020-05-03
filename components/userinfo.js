@@ -45,7 +45,11 @@ function UserInfo(props) {
       <>
         <style jsx>{UserinfoStyle}</style>
         <div className="userContainer">
-          <img className="userImage" src={data.avatar_url} />
+          <img
+            className="userImage"
+            src={data.avatar_url}
+            alt="picture of thanawat"
+          />
           <div className="userInfo">
             <b style={{ fontSize: "20px" }}>{data.name}</b>
             {` @${data.login}`}
