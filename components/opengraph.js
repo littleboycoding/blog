@@ -41,7 +41,7 @@ function OpenGraph(props) {
 				content={
 					props.baseurl +
 					(router.asPath.search("/blog/") === 0
-						? router.asPath.slice(6)
+						? router.asPath.slice(5)
 						: router.asPath)
 				}
 			/>
