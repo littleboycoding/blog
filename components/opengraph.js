@@ -38,7 +38,12 @@ function OpenGraph(props) {
 			<meta
 				key="og:url"
 				property="og:url"
-				content={props.baseurl + router.asPath}
+				content={
+					props.baseurl +
+					(router.asPath.search("/blog/") === 0
+						? router.asPath.slice(6)
+						: router.asPath)
+				}
 			/>
 			<meta key="og:type" property="og:type" content="article" />
 			<meta
