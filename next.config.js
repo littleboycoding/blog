@@ -9,7 +9,7 @@ module.exports = phase => {
 	return {
 		exportTrailingSlash: true,
 		env: {
-			baseDomain: "https://littleboycoding.github.io/blog",
+			baseDomain: "https://littleboycoding.github.io",
 			basePath: "/blog"
 		},
 		assetPrefix: "https://littleboycoding.github.io/blog"
