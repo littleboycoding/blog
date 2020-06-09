@@ -2,8 +2,13 @@ import "../css/main.css";
 import Container from "../components/container";
 import Router from "next/router";
 import { useState, useEffect } from "react";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+
 import Head from "next/head";
 
 export default ({ Component, pageProps }) => {

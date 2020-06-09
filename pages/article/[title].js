@@ -30,7 +30,7 @@ function Blog(props) {
 					cursor: pointer;
 				}
 			`}</style>
-			<Link href={props.basepath}>
+			<Link href={props.basepath + "/"}>
 				<p>
 					<FontAwesomeIcon icon={faCaretSquareLeft} />{" "}
 					<span>ย้อนกลับ</span>
@@ -67,8 +67,7 @@ function Blog(props) {
 									src={
 										imgprops.src.search("http") === 0
 											? imgprops.src
-											: (props.dev ? "" : "/blog") +
-											  imgprops.src
+											: props.basepath + imgprops.src
 									}
 									alt={imgprops.alt}
 								/>
