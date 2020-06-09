@@ -14,8 +14,8 @@ function BlogList({ data }) {
 							}
 						`}</style>
 						<Link
-							href={`${data.basepath}article/[title]`}
-							as={`${data.basepath}article/${blogArray.fileName}`}
+							href={`${data.basepath}/article/[title]`}
+							as={`${data.basepath}/article/${blogArray.fileName}`}
 						>
 							<li>{blogArray.title}</li>
 						</Link>
