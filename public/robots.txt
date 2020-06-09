@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://littleboycoding.netlify.app/sitemap.xml
+Sitemap: https://littleboycoding.github.io/blog/sitemap.xml

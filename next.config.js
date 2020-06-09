@@ -8,7 +8,7 @@ module.exports = phase => {
 	}
 	return {
 		exportTrailingSlash: true,
-		env: { API_URL: "https://littleboycoding.github.io" }
+		env: { API_URL: "https://littleboycoding.github.io/blog" }
 	};
 };
 //env: { API_URL: "https://littleboycoding.netlify.app" }
