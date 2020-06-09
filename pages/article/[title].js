@@ -60,11 +60,21 @@ function Blog(props) {
 							showLineNumbers={true}
 						/>
 					),
-					image: props => {
+					image: imgprops => {
 						return (
 							<>
-								<img src={props.src} alt={props.alt} />
-								<span className="imgCaption">{props.alt}</span>
+								<img
+									src={
+										imgprops.src.search("http") === 0
+											? imgprops.src
+											: (props.dev ? "" : "/blog") +
+											  imgprops.src
+									}
+									alt={imgprops.alt}
+								/>
+								<span className="imgCaption">
+									{imgprops.alt}
+								</span>
 							</>
 						);
 					}
