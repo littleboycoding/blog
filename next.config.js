@@ -3,13 +3,15 @@ const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
 module.exports = phase => {
 	if (phase === PHASE_DEVELOPMENT_SERVER) {
 		return {
-			env: { API_URL: "http://localhost:3000", DEV: true }
+			env: { baseDomain: "http://localhost:3000", basePath: "" }
 		};
 	}
 	return {
 		exportTrailingSlash: true,
-		env: { API_URL: "https://littleboycoding.github.io/blog", DEV: false },
+		env: {
+			baseDomain: "https://littleboycoding.github.io/blog",
+			basePath: "/blog"
+		},
 		assetPrefix: "https://littleboycoding.github.io/blog"
 	};
 };
-//env: { API_URL: "https://littleboycoding.netlify.app" }

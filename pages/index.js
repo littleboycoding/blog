@@ -14,10 +14,8 @@ function BlogList({ data }) {
 							}
 						`}</style>
 						<Link
-							href={`${data.dev ? "/" : "/blog/"}article/[title]`}
-							as={`${data.dev ? "/" : "/blog/"}article/${
-								blogArray.fileName
-							}`}
+							href={`${data.basepath}article/[title]`}
+							as={`${data.basepath}article/${blogArray.fileName}`}
 						>
 							<li>{blogArray.title}</li>
 						</Link>
@@ -31,7 +29,8 @@ function Index(props) {
 	return (
 		<>
 			<OpenGraph
-				baseurl={props.baseurl}
+				basedomain={props.basedomain}
+				basepath={props.basepath}
 				description={props.description}
 				homepage={true}
 			/>
@@ -68,8 +67,8 @@ export async function getStaticProps() {
 	return {
 		props: {
 			blog: contentList,
-			baseurl: process.env.API_URL,
-			dev: process.env.DEV,
+			basedomain: process.env.baseDomain,
+			basepath: process.env.basePath,
 			description:
 				"Latest blog - " +
 				contentList

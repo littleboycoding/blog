@@ -31,19 +31,16 @@ function OpenGraph(props) {
 					props.thumbnail
 						? props.thumbnail.search("http") === 0
 							? props.thumbnail
-							: props.baseurl + props.thumbnail
+							: props.basedomain +
+							  props.basepath +
+							  props.thumbnail
 						: "https://www.gravatar.com/avatar/81f506d45aad1acc94b8d6a64bc6a448?s=1000"
 				}
 			/>
 			<meta
 				key="og:url"
 				property="og:url"
-				content={
-					props.baseurl +
-					(router.asPath.search("/blog/") === 0
-						? router.asPath.slice(5)
-						: router.asPath)
-				}
+				content={props.basedomain + props.basepath + router.asPath}
 			/>
 			<meta key="og:type" property="og:type" content="article" />
 			<meta

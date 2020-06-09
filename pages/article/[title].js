@@ -30,7 +30,7 @@ function Blog(props) {
 					cursor: pointer;
 				}
 			`}</style>
-			<Link href={props.dev ? "/" : "/blog"}>
+			<Link href={props.basepath}>
 				<p>
 					<FontAwesomeIcon icon={faCaretSquareLeft} />{" "}
 					<span>ย้อนกลับ</span>
@@ -117,6 +117,8 @@ export async function getStaticProps({ params }) {
 		description = description.slice(0, 160) + "...";
 	}
 
+	console.log(process.env.basePath);
+
 	return {
 		props: {
 			content,
@@ -124,8 +126,8 @@ export async function getStaticProps({ params }) {
 			date: parsedDate,
 			thumbnail,
 			thumbnailalt: thumbnailAlt || "",
-			baseurl: process.env.API_URL,
-			dev: process.env.DEV,
+			basedomain: process.env.baseDomain,
+			basepath: process.env.basePath,
 			description
 		}
 	};

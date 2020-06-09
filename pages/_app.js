@@ -37,9 +37,7 @@ export default ({ Component, pageProps }) => {
 						<FontAwesomeIcon icon={faSpinner} />
 						{" กำลังโหลดข้อมูล"}
 						<Head>
-							<title>
-								กำลังโหลดข้อมูล... - Little Boy Coding
-							</title>
+							<title>กำลังโหลดข้อมูล - Little Boy Coding</title>
 						</Head>
 					</p>
 				)}
