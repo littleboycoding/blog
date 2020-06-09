@@ -40,7 +40,7 @@ function OpenGraph(props) {
 			<meta
 				key="og:url"
 				property="og:url"
-				content={props.basedomain + props.basepath + router.asPath}
+				content={props.basedomain + router.asPath}
 			/>
 			<meta key="og:type" property="og:type" content="article" />
 			<meta
