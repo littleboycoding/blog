@@ -1,7 +1,7 @@
 const sitemap = require("nextjs-sitemap-generator");
 
 sitemap({
-	baseUrl: "https://littleboycoding.github.io",
+	baseUrl: "https://littleboycoding.github.io/blog",
 	pagesDirectory: __dirname + "/out",
 	targetDirectory: "out",
 	//nextConfigPath: __dirname + "/next.config.js",

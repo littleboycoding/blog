@@ -14,8 +14,10 @@ function BlogList({ data }) {
 							}
 						`}</style>
 						<Link
-							href={`/blog/[title]`}
-							as={`/blog/${blogArray.fileName}`}
+							href={`${data.dev ? "/" : "/blog/"}article/[title]`}
+							as={`${data.dev ? "/" : "/blog/"}article/${
+								blogArray.fileName
+							}`}
 						>
 							<li>{blogArray.title}</li>
 						</Link>
@@ -67,6 +69,7 @@ export async function getStaticProps() {
 		props: {
 			blog: contentList,
 			baseurl: process.env.API_URL,
+			dev: process.env.DEV,
 			description:
 				"Latest blog - " +
 				contentList

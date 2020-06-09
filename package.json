@@ -9,7 +9,7 @@
 		"start": "next start",
 		"build": "next build",
 		"export": "next export && touch out/.nojekyll && node sitemap-gen.js",
-		"deploy": "gh-pages -d out",
+		"deploy": "gh-pages -t -d out",
 		"predeploy": "npm run build && npm run export"
 	},
 	"author": "Thanawat Yodnil",
