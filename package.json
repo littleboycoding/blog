@@ -8,7 +8,7 @@
 		"dev": "next dev",
 		"start": "next start",
 		"build": "next build",
-		"export": "next export && node sitemap-gen.js",
+		"export": "next export && touch out/.nojekyll && node sitemap-gen.js",
 		"deploy": "gh-pages -d out",
 		"predeploy": "npm run build && npm run export"
 	},
