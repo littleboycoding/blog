@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://littleboycoding.github.io/blog/sitemap.xml
