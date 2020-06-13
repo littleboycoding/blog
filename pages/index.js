@@ -12,8 +12,11 @@ function BlogList({ data }) {
 								text-decoration: none;
 								color: black;
 							}
+							a:visited {
+								color: #555;
+							}
 							a:hover {
-								text-decoration: underline !important;
+								text-decoration: underline;
 								cursor: pointer;
 							}
 						`}</style>

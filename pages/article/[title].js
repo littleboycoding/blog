@@ -30,11 +30,12 @@ function Blog(props) {
 					display: inline-block;
 					margin-top: 10px;
 				}
-				a:visited {
+				a:visited,
+				a {
 					color: black;
 				}
 				a:hover {
-					text-decoration: underline !important;
+					text-decoration: underline;
 					cursor: pointer;
 				}
 			`}</style>
