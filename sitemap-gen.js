@@ -1,7 +1,7 @@
 const sitemap = require("nextjs-sitemap-generator");
 
 sitemap({
-	baseUrl: "https://littleboycoding.github.io/blog",
+	baseUrl: "https://littleboycoding.github.io",
 	pagesDirectory: __dirname + "/out",
 	targetDirectory: "out",
 	ignoredPaths: ["404", "sitemap", "google"],
