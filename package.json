@@ -8,7 +8,7 @@
 		"start": "next start",
 		"build": "next build",
 		"export": "next export && touch out/.nojekyll && node sitemap-gen.js",
-		"deploy": "gh-pages -t -d out",
+		"deploy": "gh-pages -t -d out -r https://github.com/littleboycoding/littleboycoding.github.io.git -b master",
 		"predeploy": "npm run build && npm run export"
 	},
 	"author": "Thanawat Yodnil",

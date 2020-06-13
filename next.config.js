@@ -7,11 +7,10 @@ module.exports = phase => {
 		};
 	}
 	return {
-		exportTrailingSlash: true,
 		env: {
 			baseDomain: "https://littleboycoding.github.io",
-			basePath: "/blog"
+			basePath: ""
 		},
-		assetPrefix: "https://littleboycoding.github.io/blog"
+		assetPrefix: "https://littleboycoding.github.io/"
 	};
 };

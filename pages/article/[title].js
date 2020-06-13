@@ -25,16 +25,26 @@ function Blog(props) {
 		<>
 			<OpenGraph {...props} />
 			<style jsx>{`
-				span:hover {
+				a {
+					text-decoration: none;
+					display: inline-block;
+					margin-top: 10px;
+				}
+				a:visited {
+					color: black;
+				}
+				a:hover {
 					text-decoration: underline !important;
 					cursor: pointer;
 				}
 			`}</style>
 			<Link href={props.basepath + "/"}>
-				<p>
-					<FontAwesomeIcon icon={faCaretSquareLeft} />{" "}
-					<span>ย้อนกลับ</span>
-				</p>
+				<a>
+					<span>
+						<FontAwesomeIcon icon={faCaretSquareLeft} />{" "}
+						<span>ย้อนกลับ</span>
+					</span>
+				</a>
 			</Link>
 			<style jsx global>{`
 				.markdown p img {

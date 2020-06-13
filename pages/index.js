@@ -8,16 +8,22 @@ function BlogList({ data }) {
 			? data.blog.map(blogArray => (
 					<Fragment key={blogArray.fileName}>
 						<style jsx>{`
-							li:hover {
+							a {
+								text-decoration: none;
+								color: black;
+							}
+							a:hover {
 								text-decoration: underline !important;
 								cursor: pointer;
 							}
 						`}</style>
 						<Link
-							href={`article/[title]`}
-							as={`article/${blogArray.fileName}`}
+							href={`${data.basepath}/article/[title]`}
+							as={`${data.basepath}/article/${blogArray.fileName}`}
 						>
-							<li>{blogArray.title}</li>
+							<a>
+								<li>{blogArray.title}</li>
+							</a>
 						</Link>
 					</Fragment>
 			  ))
