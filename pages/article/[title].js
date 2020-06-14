@@ -75,6 +75,7 @@ function Blog(props) {
 						return (
 							<>
 								<img
+									loading="lazy"
 									src={
 										imgprops.src.search("http") === 0
 											? imgprops.src
