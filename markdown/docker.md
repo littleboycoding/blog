@@ -128,6 +128,8 @@ $ docker run --rm -p 8080:8080 docker-example-world-example
 
 มันคือการ expose port จาก container สู่ localhost หากไม่กำหนดจะไม่สามารถเข้าถึงได้จาก localhost
 
+![Container !](https://media.giphy.com/media/6AFldi5xJQYIo/giphy.gif)
+
 # สรุป
 
 เราได้เรียนรู้ว่า Docker คืออะไรแล้วจะใช้งานมันอย่างไร เห็นได้ว่า Docker จะทำให้กระบวนการ Deploy นั้นง่ายขึ้นมากมายหลายกอง เพียงแค่สร้าง Images แล้วนำไปรัน ไม่ต้องกังวลเรื่องสภาพแวดล้อมและแพคเกจที่ไม่ตรงกันอีกต่อไป
