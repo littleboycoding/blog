@@ -11,7 +11,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import Head from "next/head";
 
-export default ({ Component, pageProps }) => {
+export default function App({ Component, pageProps }) {
 	const [isLoading, setLoadingState] = useState(false);
 
 	useEffect(() => {

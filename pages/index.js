@@ -62,7 +62,7 @@ export async function getStaticProps() {
 		const B = fm(
 			fs.readFileSync("./markdown/" + b, { encoding: "utf8" })
 		).attributes.date.split("/");
-		return new Date(B[2], B[1], B[0]) - new Date(A[2], A[1], A[0]);
+		return new Date(B[2], B[1] - 1, B[0]) - new Date(A[2], A[1] - 1, A[0]);
 	});
 	const contentList = markdownArray.map(markdown => {
 		const file = fs.readFileSync(`./markdown/${markdown}`, "utf8");
