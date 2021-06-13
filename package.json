@@ -27,7 +27,8 @@
 		"react-markdown": "^4.3.1",
 		"react-syntax-highlighter": "^12.2.1",
 		"remove-markdown": "^0.3.0",
-		"swr": "^0.2.0"
+		"swr": "^0.2.0",
+		"xml2js": "^0.4.23"
 	},
 	"devDependencies": {
 		"gh-pages": "^3.0.0"

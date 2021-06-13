@@ -125,8 +125,6 @@ export async function getStaticProps({ params }) {
     description = description.slice(0, 160) + "...";
   }
 
-  console.log(process.env.basePath);
-
   return {
     props: {
       content,
